@@ -15,6 +15,9 @@
                  rh = height(root->Right);
             4. return the maximum of left and right height + 1.
             5. return max(lh, rh) + 1;
+
+            time complexity: O(n) where n is the number of nodes in the tree
+            space complexity: O(h) where h is the height of the tree (due to recursion stack)
         
         Traversal:
             1. check if the root is null, if it is, return 0.
@@ -25,6 +28,9 @@
                 - get the size of the queue.
                 - for each node in the current level, pop it from the queue and push its children into the queue.
             5. return height.
+
+            time complexity: O(n) where n is the number of nodes in the tree
+            space complexity: O(w) where w is the maximum width of the tree (due to queue)
 */
 
 #include <iostream>

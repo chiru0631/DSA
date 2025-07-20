@@ -11,6 +11,11 @@
          6. return max(lh, rh) + 1;
 */
 
+/*
+    time complexity: O(n) where n is the number of nodes in the tree
+    space complexity: O(h) where h is the height of the tree (due to recursion stack)
+*/
+
 #include <iostream>
 using namespace std;
 
