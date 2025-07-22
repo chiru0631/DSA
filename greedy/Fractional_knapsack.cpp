@@ -8,6 +8,7 @@
     determine the maximum total value that can be achieved by putting items in the knapsack. 
     You are allowed to break items into fractions if necessary.
     Return the maximum value as a double, rounded to 6 decimal places.
+    
 */
 
 /*
