@@ -47,6 +47,26 @@ vector<int> func(int n){
     return ans;
 }
 
+int main() {
+    int amount;
+    cout << "Enter the amount: ";
+    cin >> amount;
+
+    vector<int> result = func(amount);
+
+    if (result.empty()) {
+        cout << "No coins can make up the amount." << endl;
+    } else {
+        cout << "Coins used to make up the amount: ";
+        for (int coin : result) {
+            cout << coin << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
+
 
 
 
