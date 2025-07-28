@@ -74,6 +74,11 @@
       }
 */
 
+/*
+   time complexity: O(V + E) - where V is the number of vertices and E is the number of edges.
+   space complexity: O(V) - for the adjacency list and the stack used in DFS.
+*/
+
 #include <iostream>
 #include <vector>
 #include <stack>
