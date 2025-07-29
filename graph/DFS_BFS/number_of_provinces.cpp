@@ -45,6 +45,11 @@ Problem Statment:
         }
 */ 
 
+/*Summary:
+    time complexity: O(n^2) for creating the adjacency list and O(V + E) for dfs traversal
+    space complexity: O(n) for the visited array and O(n) for the adjacency list
+*/
+
 #include <iostream>
 #include <vector>
 using namespace std;
