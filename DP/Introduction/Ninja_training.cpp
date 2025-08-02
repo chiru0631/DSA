@@ -200,7 +200,7 @@ int main() {
 
     // Memoization approach
     vector<vector<int>> dp(n, vector<int>(4, -1)); // Initialize dp array with -1
-    cout << ninjatraining_memoization(n - 1, 3, points, dp) << endl;
+    cout << ninjatraining_memoization(n - 1, 3, points, dp) << endl;//out
 
     // Tabulation approach
     cout << ninjatraining_tabulation(n, points) << endl;
