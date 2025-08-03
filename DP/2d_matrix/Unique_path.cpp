@@ -60,6 +60,18 @@
     }
 */
 
+/*
+    Time Complexity:
+    - Recursive: O(2^(m+n)), exponential time due to overlapping subproblems.
+    - Memorization: O(m*n), as we store results for each cell.
+    - Tabulation: O(m*n), as we fill the dp table iteratively.
+
+    Space Complexity:
+    - Recursive: O(m+n) for the recursion stack.
+    - Memorization: O(m*n) for the dp table.
+    - Tabulation: O(m*n) for the dp table.
+*/
+
 #include <iostream>
 #include <vector>
 using namespace std;
