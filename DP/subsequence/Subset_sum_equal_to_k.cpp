@@ -45,13 +45,104 @@
     tabulation Approach:
     1. Create a 2D array dp of size (n x k) initialized to false.
     vector<vector<bool>> dp(n, vector<bool>(k + 1, false));
-    2. Base Case:
-       - If k == 0, then dp[i][0] = true for all i (empty subset).
-       - If ind == 0, then dp[0][k] = (arr[0] == k).
-    3. Fill the dp table:
-       - Iterate through all indices and all possible sums.
-       - For each element, decide to include it or not.
-       - Update the dp table accordingly.
-    4. Return the result:
-       - The answer will be in dp[n-1][k].
+    2. base case:
+        // if k is 0, then we can always form a subset with sum 0 (empty subset).
+        for (int i = 0; i < n; i++) {
+            dp[i][0] = true;
+        }
+        if( arr[0] <= k) {
+            dp[0][arr[0]] = true; // only one element to consider
+        }
+    
+    //there are 2 changing variables: ind and k
+    3. Iterate through the array and fill the dp table:
+    for (int ind = 1; ind < n; ind++) {
+        for (int sum = 1; sum <= k; sum++) {
+            bool notTake = dp[ind - 1][sum]; // not taking the current element
+            bool take = false;
+            if (sum >= arr[ind]) {
+                take = dp[ind - 1][sum - arr[ind]]; // taking the current element
+            }
+            dp[ind][sum] = take || notTake;
+        }
+    }
 */
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+bool subsetsum_rec(int ind, int k,vector<int> &arr){
+    //base case:
+    if(k==0) return true;
+    if(ind ==0 ) return arr[ind]==k;
+
+    // recursive case:
+    bool nottake =  subsetsum_rec(ind-1,k,arr);
+    bool take=false;
+    if(k>=arr[ind]){
+         take= subsetsum_rec(ind-1,k-arr[ind],arr);
+    }
+    return take || nottake;
+}
+
+bool subsetsume_mem0(int ind, int k, vector<int> &arr, vector<vector<int>> &dp){
+    if(k==0) return true;
+    if(ind ==0 ) return arr[ind]==k;
+
+    if(dp[ind][k] != -1) return dp[ind][k];
+
+    // recursive case:
+    bool nottake =  subsetsum_rec(ind-1,k,arr);
+    bool take=false;
+    if(k>=arr[ind]){
+         take= subsetsum_rec(ind-1,k-arr[ind],arr);
+    }
+    dp[ind][k] = take || nottake;
+    return dp[ind][k];
+}
+
+bool subsetSum_tabulation(int n, int k, vector<int> &arr) {
+    vector<vector<bool>> dp(n, vector<bool>(k + 1, false));
+
+    // base case:
+    for (int i = 0; i < n; i++) {
+        dp[i][0] = true; // sum 0 can always be formed with an empty subset
+    }
+    if (arr[0] <= k) {
+        dp[0][arr[0]] = true; // only one element to consider
+    }
+    
+
+    // fill the dp table
+    for (int ind = 1; ind < n; ind++) {
+        for (int sum = 1; sum <= k; sum++) {
+            bool notTake = dp[ind - 1][sum]; // not taking the current element
+            bool take = false;
+            if (sum >= arr[ind]) {
+                take = dp[ind - 1][sum - arr[ind]]; // taking the current element
+            }
+            dp[ind][sum] = take || notTake;
+        }
+    }
+    return dp[n - 1][k];
+
+}
+
+int main() {
+    vector<int> arr = {3, 34, 4, 12, 5, 2};
+    int k = 9;
+    int n = arr.size();
+
+    // Recursive approach
+    cout << "Using Recursion: " << (subsetsum_rec(n - 1, k, arr) ? "Yes" : "No") << endl;
+
+    // Memoization approach
+    vector<vector<int>> dp(n, vector<int>(k + 1, -1));
+    cout << "Using Memoization: " << (subsetsume_mem0(n - 1, k, arr, dp) ? "Yes" : "No") << endl;
+
+    // Tabulation approach
+    cout << "Using Tabulation: " << (subsetSum_tabulation(n, k, arr) ? "Yes" : "No") << endl;
+
+    return 0;
+}
